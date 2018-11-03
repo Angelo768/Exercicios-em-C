@@ -1,8 +1,7 @@
 #include <stdio.h>
 
 int main(){
-  int d;
-  int x = 60, y = 90;
-  float min;
-  printf("%d\n", y);
+  float x = 60, y = 90, d, hx, hy, t;
+  scanf("%f", &d);
+  
 }
