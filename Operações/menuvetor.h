@@ -2,9 +2,10 @@
 int main();
 int menuvetor();
 int lervetor();
+
 int menuvetor(){
     int mv;
-    
+
     printf("\e[H\e[2J");
     printf("===================================================\n");
     printf("|\t\tMenu Vetor                        |\n");
@@ -17,36 +18,37 @@ int menuvetor(){
     printf("Opção desejada: ");
     scanf("%d", &mv);
     switch (mv) {
-        case 1: lervetor();
+        case 1: lervetor(); menuvetor();
+        // case 2: Somar();
         case 5: main(); break;
         default: printf("Opção inválida\n"); break;
     }
 }
 
-#include <stdio.h>
-
 int lervetor(){
-    
+
     int a, i;
+
     printf("-------------------------\n");
     printf("Tamanho dos vetores: ");
     scanf("%d", &a);
-    int V1[a];
-    int V2[a];
-    for (i=0; i < a;i++){
+    printf("-------------------------\n");
+    int V1[a], V2[a];
+    for ( i = 0;  i < a; i++){
         printf("Vetor 1 - Posição [%d]: ", i);
         scanf("%d", &V1[i]);
     }
     printf("-------------------------\n");
-    for (i=0; i < a;i++){
-        
-        printf("Vator 2 - Posição [%d]: ", i);
+    for ( i = 0; i < a; i++){
+        printf("Vetor 2 - Posição [%d]: ", i);
         scanf("%d", &V2[i]);
     }
-    return V1[a], V2[a];
-    return menuvetor();
-    return 0;
+    return a, V1[a], V2[a];
 }
 
-
-
+int Somar(){
+    int i, a, V[a];
+    for (i = 0; i < a; i++){
+        printf("%d", V[a]);
+    }
+}

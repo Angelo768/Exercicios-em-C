@@ -4,13 +4,14 @@
 
 int main(){
     int op;
+
     printf("\e[H\e[2J");
     printf("==============================\n");
     printf("|\tMenu Inicial         |\n");
     printf("==============================\n");
     printf("|1. Operações com vetores    |\n");
     printf("|2. Operações com matrizes   |\n");
-    printf("|3. Sair do programa         |\n");
+    printf("|3. Sair do programa         |\n\n");
     printf("Operação desejada: ");
     scanf("%d", &op);
     switch (op){
