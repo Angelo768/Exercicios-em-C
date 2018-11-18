@@ -51,11 +51,11 @@ int Mult(int *v1, int *v2, int t){
     case 1:
       printf("Qual o escalar? \n");
       scanf("%d", &escalar);
-      for(int i=0;i<t;i++) printf("[%d] x %d = %d", v1[i], escolha, v1[i]*escalar);
+      for(int i=0;i<t;i++) printf("[%d] x %d = %d\n", v1[i], escolha, v1[i]*escalar);
     case 2:
       printf("Qual o escalar? \n");
       scanf("%d", &escalar);
-      for(int i=0;i<t;i++) printf("[%d] x %d = %d", v2[i], escolha, v2[i]*escalar);
+      for(int i=0;i<t;i++) printf("[%d] x %d = %d\n", v2[i], escolha, v2[i]*escalar);
     default: printf("Opção inválida\n");
   }
 
