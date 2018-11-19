@@ -32,22 +32,37 @@ int voltavet(){
 // FUNÇÃO PARA LEITURA DE DOIS VETORES
 int lervetor(int **v1, int **v2, int *t){
 
-    int a, i;
+    int a, i, c;
     linhavet(30);
-    printf("Tamanho dos vetores: ");
+    printf("Tamanho dos vetores: \n");
+    linhavet(30);
     scanf("%d", t);
     linhavet(30);
-    *v1 = (int*)malloc((*t)*sizeof(int));
-    *v2 = (int*)malloc((*t)*sizeof(int));
-    for ( i = 0;  i < *t; i++){
-        printf("Vetor 1 - Posição [%d]: ", i);
-        scanf("%d", &(*v1)[i]);
-    }
+    printf("Confirmar tamanho: \n1 => SIM\n2 => NÃO\n");
     linhavet(30);
-    for ( i = 0; i < *t; i++){
-        printf("Vetor 2 - Posição [%d]: ", i);
-        scanf("%d", &(*v2)[i]);
+    scanf("%d", &c);
+    switch (c) {
+      case 1: {
+        linhavet(30);
+        *v1 = (int*)malloc((*t)*sizeof(int));
+        *v2 = (int*)malloc((*t)*sizeof(int));
+        for ( int j = 0;  j < *t; j++){
+            printf("Vetor 1 - Posição [%d]: ", j);
+            scanf("%d", &(*v1)[j]);
+        }
+        linhavet(30);
+        for ( int j = 0; j < *t; j++){
+            printf("Vetor 2 - Posição [%d]: ", j);
+            scanf("%d", &(*v2)[j]);
+        }
+      }break;
+      case 2: printf("Voltando ao menu inicial digite 0 para voltar "); scanf("%d", &i); main(); break;
+      default: {
+        printf("Opção inválida...Voltando ao menu inicial\n\nAperte 0 para continuar ");
+        scanf("%d", &i); main();
+      }
     }
+
     return 0;
 }
 
@@ -83,7 +98,7 @@ int Mult(int *v1, int *v2, int t){
     scanf("%d", &escolha);
   switch (escolha){
     case 1:{
-      printf("\nQual o escalar?");
+      printf("\nQual o escalar? ");
       while(escalar != 0){
           scanf("%d", &escalar);
           linhavet(30);

@@ -3,9 +3,10 @@
 #include "menuvetor.h"
 
 int tam = 1, *vector1 = NULL , *vector2 = NULL;
-int emv=0, emp=0;
+int emv, emp;
 
-int linhap(int l){
+
+int linhaM(int l){
     for(int i = 0; i < l; i++){
         printf("=");
     }
@@ -15,40 +16,42 @@ int linhap(int l){
 // MENU PRINCIPAL DA BIBLIOTECA DE VETORES E MATRIZES
 int main(){
     int op, voltar;
+    emp = 0;
     printf("\e[H\e[2J");
-    linhap(30);
+    linhaM(30);
     printf("|\tMenu Inicial         |\n");
-    linhap(30);
+    linhaM(30);
     printf("|1. Operações com vetores    |\n");
     printf("|2. Operações com matrizes   |\n");
     printf("|3. Sair do programa         |\n");
-    linhap(30); printf("\n");
+    linhaM(30); printf("\n");
     printf("Operação desejada: "); scanf("%d", &op);
 
     switch (op){
-        case 1: menuvetor(); break;
+        case 1: lervetor(&vector1, &vector2, &tam); menuvetor(); break;
         case 2: menumatriz(); break;
         case 3: printf("Encerrando programa...\n"); break;
         default:{
             printf("\nOpção inválida... Tente uma das opções do menu!\n\n0 para voltar ao menu: ");
-            scanf("%d", &voltar); main();
+            scanf("%d", &voltar); emp++; main();
         }
     }
+
 }
 
 
 int menuvetor(){
     int mv;
     printf("\e[H\e[2J");
-    linhap(51);
-    printf("|\t\tMenu Vetor                        |\n");
-    linhap(51);
-    printf("|1. Ler vetores.                                  |\n");
+    linhaM(51);
+    printf("\t  BEM VINDO AO MENU DE VETORES            |\n");
+    linhaM(51);
+    printf("|1. Escolher outros vetores.                      |\n");
     printf("|2. Somar os dois vetores.                        |\n");
     printf("|3. Multiplicar um dos vetores por um escalar.    |\n");
     printf("|4. Realizar o produto escalar entre dois vetores.|\n");
     printf("|5. Voltar ao menu anterior.                      |\n");
-    linhap(51); printf("\n");
+    linhaM(51); printf("\n");
     printf("Opção desejada: "); scanf("%d", &mv);
 
     switch (mv) {
