@@ -2,7 +2,7 @@
   #    TRABALHO DA CADEIRA DE INTRODUÇÃO A CIÊNCIA DA COMPUTAÇÃO  #
   #         BIBLIOTECA DE MANIPULAÇÃO DE VETORES EM C             #
   #            Autor: Raimundo Angeliano Gonçalves de Sousa       #
-  #               UNIVERSIDADE ESTADUAL DO CEÁRA                  #
+  #               UNIVERSIDADE ESTADUAL DO CEARÁ                  #
   #                   FORTALEZA/CE - 2018                         #
   #################################################################*/
 

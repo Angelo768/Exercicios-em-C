@@ -3,7 +3,8 @@
 #include "menuvetor.h"
 
 int tam = 1, *vector1 = NULL , *vector2 = NULL;
-int emv, emp;
+int l1=1, c1=1, l2=1, c2=1, **M1=NULL, **M2=NULL;
+int confirma, emv, emp;
 
 
 int linhaM(int l){
@@ -29,7 +30,7 @@ int main(){
 
     switch (op){
         case 1: lervetor(&vector1, &vector2, &tam); menuvetor(); break;
-        case 2: menumatriz(); break;
+        case 2: lermat(&M1, &l1, &c1, &M2, &l2, &c2); break;
         case 3: printf("Encerrando programa...\n"); break;
         default:{
             printf("\nOpção inválida... Tente uma das opções do menu!\n\n0 para voltar ao menu: ");
@@ -61,5 +62,29 @@ int menuvetor(){
         case 4: Prod2V(vector1, vector2, tam); menuvetor(); break;
         case 5: main(); break;
         default: printf("Opção inválida... Tente uma das opções do menu!\n\n"); menuvetor();
+    }
+}
+
+
+int menumatriz(){
+    int mm;
+    printf("\e[H\e[2J");
+    linhaM(45);
+    printf("|      BEM VINDO AO MENU DE MATRIZES        |\n");
+    linhaM(45);
+    printf("|1. Ler matrizes                            |\n");
+    printf("|2. Somar duas matrizes                     |\n");
+    printf("|3. Multiplicar duas matrizes               |\n");
+    printf("|4. Calcular a transposta                   |\n");
+    printf("|5. Calcular o determinante                 |\n");
+    printf("|6. Verificar se há uma matriz simétrica    |\n");
+    printf("|7. Voltar ao menu anterior                 |\n");
+    linhaM(45);
+    printf("\nOpção desejada: ");
+    scanf("%d", &mm);
+    switch (mm){
+        case 1: lermat(&M1, &l1, &c1, &M2, &l2, &c2); break;
+        case 7: main(); break;
+        default: printf("Opção inválida... Tente uma das opções do menu!\n\n"); menumatriz();
     }
 }
