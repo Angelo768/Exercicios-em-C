@@ -1,6 +1,14 @@
+/*#################################################################
+  #    TRABALHO DA CADEIRA DE INTRODUÇÃO A CIÊNCIA DA COMPUTAÇÃO  #
+  #       BIBLIOTECA DE MANIPULAÇÃO DE VETORES E MATRIZES EM C    #
+  #            Autor: Raimundo Angeliano Gonçalves de Sousa       #
+  #               UNIVERSIDADE ESTADUAL DO CEARÁ                  #
+  #                   FORTALEZA/CE - 2018                         #
+  #################################################################*/
+
 #include <stdio.h>
-#include "menumatriz.h"
-#include "menuvetor.h"
+#include "funções_matriz.h"
+#include "funções_vetor.h"
 
 int tam = 1, *vector1 = NULL , *vector2 = NULL;
 int l1=1, c1=1, l2=1, c2=1, **M1=NULL, **M2=NULL;
@@ -84,12 +92,12 @@ int menumatriz(){
     scanf("%d", &mm);
     switch (mm){
         case 1: lermat(&M1, &l1, &c1, &M2, &l2, &c2); menumatriz(); break;
-        case 2: SomarMat(&M1 , &l1, &c1, &M2, &l2, &c2); break;
-        // case 3: MultMat(M1, l1, c1, M2, l2, c2); break;
-        // case 4: Transp(M1, l1, c1, M2, l2, c2); break;
+        case 2: SomarMat(&M1 , &l1, &c1, &M2, &l2, &c2); menumatriz(); break;
+        //case 3: MultMat(&M1, &l1, &c1, &M2, &l2, &c2); break;
+        case 4: Transp(&M1 , &l1, &c1, &M2, &l2, &c2); menumatriz(); break;
         // case 5: Det(M1, l1, c1, M2, l2, c2); break;
         // case 6: Sime(M1, l1, c1, M2, l2, c2); break
         case 7: main(); break;
-        default: printf("Opção inválida... Tente uma das opções do menu!\n\n"); menumatriz();
+        default: printf("Opção inválida... Tente uma das opções do menu!\n\n"); voltamat();
     }
 }
