@@ -30,7 +30,7 @@ int main(){
 
     switch (op){
         case 1: lervetor(&vector1, &vector2, &tam); menuvetor(); break;
-        case 2: lermat(&M1, &l1, &c1, &M2, &l2, &c2); break;
+        case 2: lermat(&M1, &l1, &c1, &M2, &l2, &c2); menumatriz(); break;
         case 3: printf("Encerrando programa...\n"); break;
         default:{
             printf("\nOpção inválida... Tente uma das opções do menu!\n\n0 para voltar ao menu: ");
@@ -57,9 +57,9 @@ int menuvetor(){
 
     switch (mv) {
         case 1: lervetor(&vector1, &vector2, &tam); menuvetor(); break;
-        case 2: Somar(vector1, vector2, tam); menuvetor(); break;
-        case 3: Mult(vector1, vector2, tam); menuvetor(); break;
-        case 4: Prod2V(vector1, vector2, tam); menuvetor(); break;
+        case 2: Somarvet(vector1, vector2, tam); menuvetor(); break;
+        case 3: Multvet(vector1, vector2, tam); menuvetor(); break;
+        case 4: Prod2Vet(vector1, vector2, tam); menuvetor(); break;
         case 5: main(); break;
         default: printf("Opção inválida... Tente uma das opções do menu!\n\n"); menuvetor();
     }
@@ -72,7 +72,7 @@ int menumatriz(){
     linhaM(45);
     printf("|      BEM VINDO AO MENU DE MATRIZES        |\n");
     linhaM(45);
-    printf("|1. Ler matrizes                            |\n");
+    printf("|1. Ler outras matrizes                     |\n");
     printf("|2. Somar duas matrizes                     |\n");
     printf("|3. Multiplicar duas matrizes               |\n");
     printf("|4. Calcular a transposta                   |\n");
@@ -83,7 +83,12 @@ int menumatriz(){
     printf("\nOpção desejada: ");
     scanf("%d", &mm);
     switch (mm){
-        case 1: lermat(&M1, &l1, &c1, &M2, &l2, &c2); break;
+        case 1: lermat(&M1, &l1, &c1, &M2, &l2, &c2); menumatriz(); break;
+        case 2: SomarMat(&M1 , &l1, &c1, &M2, &l2, &c2); break;
+        // case 3: MultMat(M1, l1, c1, M2, l2, c2); break;
+        // case 4: Transp(M1, l1, c1, M2, l2, c2); break;
+        // case 5: Det(M1, l1, c1, M2, l2, c2); break;
+        // case 6: Sime(M1, l1, c1, M2, l2, c2); break
         case 7: main(); break;
         default: printf("Opção inválida... Tente uma das opções do menu!\n\n"); menumatriz();
     }

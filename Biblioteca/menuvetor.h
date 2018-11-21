@@ -68,7 +68,7 @@ int lervetor(int **v1, int **v2, int *t){
 
 
 // FUNÇÃO PARA SOMAR OS DOIS VETORES LIDOS NA FUNÇÃO lervetor();
-int Somar(int *v1, int *v2, int t){
+int Somarvet(int *v1, int *v2, int t){
     printf("\n");
     int p;
     linhavet(30);
@@ -79,7 +79,7 @@ int Somar(int *v1, int *v2, int t){
 
 
 // FUNÇÃO PARA MULTIPLICAR POR UM ESCALAR
-int Mult(int *v1, int *v2, int t){
+int Multvet(int *v1, int *v2, int t){
     printf("\n");
     linhavet(30);
     printf("[1] Vetor1: ");
@@ -127,7 +127,7 @@ int Mult(int *v1, int *v2, int t){
 
 
 // FUNÇÃO QUE RETORNA O PRODUTO ENTRE DOIS VETORES LIDOS PELA FUNÇÃO lervetor();
-int Prod2V(int *v1, int *v2, int t){
+int Prod2Vet(int *v1, int *v2, int t){
     linhavet(20);
     for(int i = 0; i < t; i++){
         printf("v1[%d] * v2[%d] = [%d]\n", v1[i], v2[i], v1[i]*v2[i]);
