@@ -10,15 +10,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main();
+
 int menumatriz();
-int lermat(int ***M1, int *l1, int *c1, int ***M2, int *l2, int *c2);
-int SomarMat(int ***mat1, int *l1, int *c1, int ***mat2, int *l2, int *c2);
-int MostrarMat1(int ***mat1, int *l1, int *c1, int ***mat2, int *l2, int *c2);
-int MostrarMat2(int ***mat1, int *l1, int *c1, int ***mat2, int *l2, int *c2);
-int Transp(int ***mat1, int *l1, int *c1, int ***mat2, int *l2, int *c2);
-int Det(int ***mat1, int *l1, int *c1, int ***mat2, int *l2, int *c2);
-int Sime(int ***mat1, int *l1, int *c1, int ***mat2, int *l2, int *c2);
 
 int voltamat(){   // FUNÇÃO QUE FINALIZA AS OUTRAS FUNÇÕES
     int voltar;
@@ -48,6 +41,7 @@ int MostrarMat2(int ***mat1, int *l1, int *c1, int ***mat2, int *l2, int *c2){
   }
 }
 
+//FUNÇÃO PARA PRINTAR LINHAS NA TELA
 int linhamat(int l){
     for(int i = 0; i < l; i++){
         printf("-");
@@ -145,7 +139,7 @@ int MultMat(int ***mat1, int *l1, int *c1, int ***mat2, int *l2, int *c2){
   }
 }
 
-// FUNÇÃO QUE CÁLCULA A TRANSPOSTA DA MATRIZ ESCOLHIDA - OK!!
+// FUNÇÃO QUE CÁLCULA A TRANSPOSTA DA MATRIZ ESCOLHIDA - MANUTENÇÃO
 int Transp(int ***mat1, int *l1, int *c1, int ***mat2, int *l2, int *c2){
   int escolha;
   printf("\n=======  MATRIZ 01  =======\n");
@@ -161,10 +155,10 @@ int Transp(int ***mat1, int *l1, int *c1, int ***mat2, int *l2, int *c2){
       linhamat(30);
       printf("    Transposta da MATRIZ 01\n");
       linhamat(30);
-      for (int i = 0; i < *l1; i++){          // CÁLCULO DA TRANSPOSTA DA MATRIZ 01
+      for (int i = 0; i < *c1; i++){          // CÁLCULO DA TRANSPOSTA DA MATRIZ 01
         printf("\t");
-        for (int j = 0; j < *c1; j++){
-          printf("[ %d ]", (*mat1)[j][i]);
+        for (int j = 0; j < *l1; j++){
+          printf("[ %d ]", (*mat1)[i][j]);
         }
       printf("\n");
       }
@@ -173,9 +167,9 @@ int Transp(int ***mat1, int *l1, int *c1, int ***mat2, int *l2, int *c2){
       linhamat(30);
       printf("    Transposta da MATRIZ 02\n");
       linhamat(30);
-      for (int i = 0; i < *l2; i++){          // CÁLCULO DA TRANSPOSTA DA MATRIZ 02
+      for (int i = 0; i < *c2; i++){          // CÁLCULO DA TRANSPOSTA DA MATRIZ 02
         printf("\t");
-        for (int j = 0; j < *c2; j++){
+        for (int j = 0; j < *l2; j++){
           printf("[ %d ]", (*mat2)[j][i]);
         }
       printf("\n");
@@ -185,7 +179,7 @@ int Transp(int ***mat1, int *l1, int *c1, int ***mat2, int *l2, int *c2){
   }
 }
 
-// FUNÇÃO QUE CHECA SE A MATRIZ ESCOLHIDA É SIMÉTRICA - MANUTENÇÃO
+// FUNÇÃO QUE CHECA SE A MATRIZ ESCOLHIDA É SIMÉTRICA - OK!!
 int Sime(int ***mat1, int *l1, int *c1, int ***mat2, int *l2, int *c2){
   int escolha, i, j, S1[*l1][*c1], S2[*l2][*c2];
   linhamat(30);
@@ -199,21 +193,55 @@ int Sime(int ***mat1, int *l1, int *c1, int ***mat2, int *l2, int *c2){
   switch (escolha) {
     case 1: {
       if (*l1 == *c1){
-      for (i = 0; i < *l1; i++){        // Armazenando a matriz transposta
-        for ( j = 0; j < *c1; j++){
-          S1[*l1][*c1] = (*mat1)[j][i];
+          for (i = 0; i < *l1; i++){        // Armazenando a matriz 01 transposta
+            for ( j = 0; j < *c1; j++){
+              (S1)[i][j] = (*mat1)[j][i];
         }
       }
+      for (i = 0; i < *l1; i++){        // Comparando a matriz 01 com a sua transposta
+        for ( j = 0; j < *c1; j++){
+          if((S1)[i][j] != (*mat1)[i][j]) break;
+            }
+            if (j != *c1) break;
+        }
+        if (i == *l1) {
+            printf("\nA MATRIZ 01 É SIMÉTRICA\n");
+        }else{
+            printf("\nA MATRIZ 01 NÃO É SIMÉTRICA\n");
+        }
     }else{
-      printf("ESSA MATRIZ NÃO É SIMÉTRICA!!\n");
+        printf("\nA MATRIZ 01 NÃO É SIMÉTRICA\n");
     }
-      if(S1[*l1][*c1] == (*mat1)[i][j]) printf("A MATRIZ 01 é Simétrica\n");
-    } menumatriz(); break;
+  } voltamat(); menumatriz(); break;
+  case 2:{
+      {
+        if (*l2 == *c2){
+            for (i = 0; i < *l2; i++){        // Armazenando a matriz 02 transposta
+              for ( j = 0; j < *c2; j++){
+                (S2)[i][j] = (*mat2)[j][i];
+          }
+        }
+        for (i = 0; i < *l2; i++){        // Comparando a matriz 02 com a sua transposta
+          for ( j = 0; j < *c2; j++){
+            if((S2)[i][j] != (*mat2)[i][j]) break;
+              }
+              if (j != *c2) break;
+          }
+          if (i == *l2) {
+              printf("\nA MATRIZ 02 É SIMÉTRICA\n");
+          }else{
+              printf("\nA MATRIZ 02 NÃO É SIMÉTRICA\n");
+          }
+      }else{
+          printf("\nA MATRIZ 02 NÃO É SIMÉTRICA\n");
+      }
+    } voltamat(); menumatriz(); break;
+  }
     default : printf("Voltando ao menu de matriz..\n\n"); voltamat();
   }
 }
 
-// FUNÇÃO QUE CALCULA O DETERMINANTE DA MATRIZ ESCOLHIDA
+// FUNÇÃO QUE CALCULA O DETERMINANTE DA MATRIZ ESCOLHIDA - OK!!
 int Det(int ***mat1, int *l1, int *c1, int ***mat2, int *l2, int *c2){
   int escolha, D;
   printf("AVISO!!: Aqui os cálculos de determinate vale para\nmatrizes quadradas de até ordem 3x3");
