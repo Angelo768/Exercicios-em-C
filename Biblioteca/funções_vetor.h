@@ -38,28 +38,28 @@ int lervetor(int **v1, int **v2, int *t){
     linhavet(30);
     scanf("%d", t);
     linhavet(30);
-    printf("Confirmar tamanho: \n1 => SIM\n2 => NÃO\n");
+    printf("Confirmar tamanho: \n1 => SIM\n2 => NÃO\n");     // Confirma o tamanho do vetor desejado
     linhavet(30);
     scanf("%d", &c);
     switch (c) {
       case 1: {
         linhavet(30);
-        *v1 = (int*)malloc((*t)*sizeof(int));
+        *v1 = (int*)malloc((*t)*sizeof(int));     // Definindo o tamanho do array
         *v2 = (int*)malloc((*t)*sizeof(int));
         for ( int j = 0;  j < *t; j++){
-            printf("Vetor 1 - Posição [%d]: ", j);
+            printf("Vetor 1 - Posição [%d]: ", j);    // Alocando valores vetor 01
             scanf("%d", &(*v1)[j]);
         }
         linhavet(30);
         for ( int j = 0; j < *t; j++){
-            printf("Vetor 2 - Posição [%d]: ", j);
+            printf("Vetor 2 - Posição [%d]: ", j);    // Alocando valores vetor 02
             scanf("%d", &(*v2)[j]);
         }
       }break;
-      case 2: printf("Voltando ao menu inicial digite 0 para voltar "); scanf("%d", &i); main(); break;
+      case 2: printf("Voltando ao menu inicial... digite "); voltavet(); main(); break;
       default: {
         printf("Opção inválida...Voltando ao menu inicial\n\nAperte 0 para continuar ");
-        scanf("%d", &i); main();
+      voltavet(); main();
       }
     }
 

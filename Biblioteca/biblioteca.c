@@ -95,8 +95,8 @@ int menumatriz(){
         case 2: SomarMat(&M1 , &l1, &c1, &M2, &l2, &c2); menumatriz(); break;
         //case 3: MultMat(&M1, &l1, &c1, &M2, &l2, &c2); break;
         case 4: Transp(&M1 , &l1, &c1, &M2, &l2, &c2); menumatriz(); break;
-        // case 5: Det(M1, l1, c1, M2, l2, c2); break;
-        // case 6: Sime(M1, l1, c1, M2, l2, c2); break
+        case 5: Det(&M1 , &l1, &c1, &M2, &l2, &c2); break;
+        // case 6: Sime(&M1 , &l1, &c1, &M2, &l2, &c2); break;
         case 7: main(); break;
         default: printf("Opção inválida... Tente uma das opções do menu!\n\n"); voltamat();
     }
