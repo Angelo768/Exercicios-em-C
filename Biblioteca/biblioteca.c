@@ -85,7 +85,7 @@ int menumatriz(){
     printf("|3. Multiplicar duas matrizes               |\n");
     printf("|4. Calcular a transposta                   |\n");
     printf("|5. Calcular o determinante                 |\n");
-    printf("|6. Verificar se há uma matriz simétrica    |\n");
+    printf("|6. Verificar se a matriz é simétrica       |\n");
     printf("|7. Voltar ao menu anterior                 |\n");
     linhaM(45);
     printf("\nOpção desejada: ");
@@ -93,7 +93,7 @@ int menumatriz(){
     switch (mm){
         case 1: lermat(&M1, &l1, &c1, &M2, &l2, &c2); menumatriz(); break;
         case 2: SomarMat(&M1 , &l1, &c1, &M2, &l2, &c2); menumatriz(); break;
-        //case 3: MultMat(&M1, &l1, &c1, &M2, &l2, &c2); menumatriz(); break;
+        case 3: MultMat(&M1, &l1, &c1, &M2, &l2, &c2); menumatriz(); break;
         case 4: Transp(&M1 , &l1, &c1, &M2, &l2, &c2); menumatriz(); break;
         case 5: Det(&M1 , &l1, &c1, &M2, &l2, &c2); menumatriz(); break;
         case 6: Sime(&M1 , &l1, &c1, &M2, &l2, &c2); menumatriz(); break;
