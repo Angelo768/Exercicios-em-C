@@ -23,6 +23,7 @@ int voltamat(){   // FUNÇÃO QUE FINALIZA AS OUTRAS FUNÇÕES
 int MostrarMat1(int ***mat1, int *l1, int *c1, int ***mat2, int *l2, int *c2){
 
   for (int i = 0; i < *l1; i++){
+    printf("\t  ");
     for (int j = 0; j < *c1; j++){
       printf("\t[ %d ]", (*mat1)[i][j]);
     }
@@ -34,6 +35,7 @@ int MostrarMat1(int ***mat1, int *l1, int *c1, int ***mat2, int *l2, int *c2){
 int MostrarMat2(int ***mat1, int *l1, int *c1, int ***mat2, int *l2, int *c2){
 
   for (int i = 0; i < *l2; i++){
+    printf("\t  ");
     for (int j = 0; j < *c2; j++){
       printf("\t[ %d ]", (*mat2)[i][j]);
     }
@@ -54,7 +56,7 @@ int lermat(int ***mat1, int *l1, int *c1, int ***mat2, int *l2, int *c2){
   int tamanho, c;
 
   // LENDO A PRIMEIRA MATRIZ
-  printf("\n======= MATRIZ 01 =======\n\n");
+  printf("\n====================== MATRIZ 01 ======================\n\n");
   printf("Tamanho da linha: ");
   scanf("%d", l1);
   printf("Tamanho da coluna: ");
@@ -73,7 +75,7 @@ int lermat(int ***mat1, int *l1, int *c1, int ***mat2, int *l2, int *c2){
   }
 
   // LENDO A SEGUNDA MATRIZ
-  printf("\n======= MATRIZ 02 =======\n\n");
+  printf("\n====================== MATRIZ 02 ======================\n\n");
   printf("Tamanho da linha: ");
   scanf("%d", l2);
   printf("Tamanho da coluna: ");
@@ -82,7 +84,7 @@ int lermat(int ***mat1, int *l1, int *c1, int ***mat2, int *l2, int *c2){
   for (int i = 0; i < *l2; i++){
     (*mat2)[i] = (int *)malloc((*c2)*sizeof(int*));
   }
-  printf("Posição: \n");
+  printf("\nPosição: \n");
   for(int i = 0; i < *l2; i++){
     for(int j = 0; j < *c2; j++){
       printf("[%d][%d]: ", i, j);
@@ -117,28 +119,38 @@ int SomarMat(int ***mat1, int *l1, int *c1, int ***mat2, int *l2, int *c2){
 
 // FUNÇÃO QUE CALCULA PRODUTO ENTRE MATRIZES - MANUTENÇÃO
 int MultMat(int ***mat1, int *l1, int *c1, int ***mat2, int *l2, int *c2){
-  int escolha, P1[*l1][*c1], P2[*l2][*c2];
-  printf("\n=======  MATRIZ 01  =======\n");
+  int escolha, i, j, P1[*l1][*c1], P2[*l2][*c2];
+  printf("\n======================  MATRIZ 01  ======================\n\n");
   MostrarMat1(mat1, l1, c1, mat2, l2, c2);  // Printando a Matriz 01
-  printf("\n=======  MATRIZ 02  =======\n");
+  printf("\n======================  MATRIZ 02  ======================\n\n");
   MostrarMat2(mat1, l1, c1, mat2, l2, c2);  // Printando a Matriz 02
-  linhamat(45);
-  printf("Escolha uma dos produtos a seguir\n1 => MATRIZ01 X MATRIZ02\n2 => MATRIZ02 X MATRIZ01\n");
-  linhamat(45);
+  linhamat(57);
+  printf("\tEscolha um dos produtos a seguir\n\n\t\t1 => MATRIZ01 X MATRIZ02\n\t\t2 => MATRIZ02 X MATRIZ01\n\n");
+  linhamat(57);
   scanf("%d", &escolha);
   switch (escolha) {
-    case 1:{
+    case 1: {
       if(*l1 == *c2){
-        for(int i = 0; i < *l1; i++){
-          printf("\t");
-          for(int j = 0; j < *c2; j++){
-
+        printf("\n======================= NOVA MATRIZ =======================\n\n");
+        for(int m = 0; m < *c1; m++){     // Nova Matriz
+          for(int n = 0; n < *l2; n++){
+            for(int i1 = 0; i1 < *l1; i1++){    // Matriz 01
+              for (int j1 = 0; j1 < *c1; j1++) {
+                for (int j2 = 0; j2 < *c2; j2++) {  // Matriz 02
+                  for (int i2 = 0; i2 < *l2; i2++) {
+                    P1[m][n] = ((*mat1)[i1][j1])*((*mat2)[i2][j2]);
+                  }
+                }
+              }
+            }
+            printf("\t[%d]", P1[m][n]);
           }
+          printf("\n");
         }
         printf("\n");
-    }
+  } voltamat(); menumatriz(); break;
     default : printf("Opção inválida...Escolha uma das operações sugeridas!\n"); MultMat(mat1, l1, c1, mat2, l2, c2);
-    } voltamat(); menumatriz(); break;
+    }
   }
 }
 
