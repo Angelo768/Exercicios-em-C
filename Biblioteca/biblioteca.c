@@ -12,8 +12,7 @@
 
 int tam = 1, *vector1 = NULL , *vector2 = NULL;
 int l1=1, c1=1, l2=1, c2=1, **M1=NULL, **M2=NULL;
-int confirma, emv, emp;
-
+int cont = 0;
 
 int linhaM(int l){
     for(int i = 0; i < l; i++){
@@ -25,7 +24,6 @@ int linhaM(int l){
 // MENU PRINCIPAL DA BIBLIOTECA DE VETORES E MATRIZES
 int main(){
     int op, voltar;
-    emp = 0;
     printf("\e[H\e[2J");
     linhaM(30);
     printf("|\tMenu Inicial         |\n");
@@ -42,7 +40,7 @@ int main(){
         case 3: printf("Encerrando programa...\n"); break;
         default:{
             printf("\nOpção inválida... Tente uma das opções do menu!\n\n0 para voltar ao menu: ");
-            scanf("%d", &voltar); emp++; main();
+            scanf("%d", &voltar); main();
         }
     }
 
@@ -73,7 +71,6 @@ int menuvetor(){
     }
 }
 
-
 int menumatriz(){
     int mm;
     printf("\e[H\e[2J");
@@ -88,7 +85,11 @@ int menumatriz(){
     printf("|6. Verificar se a matriz é simétrica       |\n");
     printf("|7. Voltar ao menu anterior                 |\n");
     linhaM(45);
-    printf("\nOpção desejada: ");
+    if(cont != 0){
+        printf("Opção inválida...Digite outra...\n\n");
+    }else{
+        printf("\n\nOpção desejada: ");
+    }
     scanf("%d", &mm);
     switch (mm){
         case 1: lermat(&M1, &l1, &c1, &M2, &l2, &c2); menumatriz(); break;
@@ -98,6 +99,6 @@ int menumatriz(){
         case 5: Det(&M1 , &l1, &c1, &M2, &l2, &c2); menumatriz(); break;
         case 6: Sime(&M1 , &l1, &c1, &M2, &l2, &c2); menumatriz(); break;
         case 7: main(); break;
-        default: printf("Opção inválida... Tente uma das opções do menu!\n\n"); voltamat();
+        default: printf("Opção inválida... Tente uma das opções do menu!\n\n"); cont++; menumatriz();
     }
 }

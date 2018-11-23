@@ -1,12 +1,16 @@
 #include <stdio.h>
-#include <stdlib.h>
+ #define LIMITE 25
 
 int main(){
-
-    // int i, *n = (int*)calloc(6, sizeof(int));
-    // for(i=0;i<5;i++) printf("Sei lá %d\n", *n);//scanf("%d", &(*n[5]));
-    // int i, **t, **v2 = NULL;
-    int a = 0;
-    a = getchar();
-    printf("%d\n", a);
+     
+    printf("\n====================== NOVA MATRIZ 2======================\n\n");
+    for (int i = 0; i < *l2; i++) {
+        for (int j = 0; j < *c1; j++) {
+            P2[i][j] = 0;
+            for (int k = 0; k < *l1; k++)
+                P2[i][j] = P2[i][j] + (*mat2)[i][k]*(*mat1)[k][j];
+            printf("[ %d ]", P2[i][j]);
+        }
+        printf("\t\n");
+    }
 }
