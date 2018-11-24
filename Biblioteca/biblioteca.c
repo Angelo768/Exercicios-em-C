@@ -7,8 +7,8 @@
   #################################################################*/
 
 #include <stdio.h>
-#include "funções_matriz.h"
-#include "funções_vetor.h"
+#include "funcoes_matriz.h"
+#include "funcoes_vetor.h"
 
 int tam = 1, *vector1 = NULL , *vector2 = NULL;
 int l1=1, c1=1, l2=1, c2=1, **M1=NULL, **M2=NULL;
