@@ -33,7 +33,7 @@ int main(){
     printf("|3. Sair do programa         |\n");
     linhaM(30); printf("\n");
     printf("Operação desejada: "); scanf("%d", &op);
-
+   
     switch (op){
         case 1: lervetor(&vector1, &vector2, &tam); menuvetor(); break;
         case 2: lermat(&M1, &l1, &c1, &M2, &l2, &c2); menumatriz(); break;
@@ -41,7 +41,7 @@ int main(){
         default:{
             printf("\nOpção inválida... Tente uma das opções do menu!\n\n0 para voltar ao menu: ");
             scanf("%d", &voltar); main();
-        }
+        } 
     }
 
 }

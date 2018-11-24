@@ -46,13 +46,13 @@ int lervetor(int **v1, int **v2, int *t){
         linhavet(30);
         *v1 = (int*)malloc((*t)*sizeof(int));     // Definindo o tamanho do array
         *v2 = (int*)malloc((*t)*sizeof(int));
-        printf("Vetor 1 - Posição ");
+        printf("Vetor 1 - Posição \n");
         for ( int j = 0;  j < *t; j++){
             printf("[%d]: ", j);    // Alocando valores vetor 01
             scanf("%d", &(*v1)[j]);
         }
         linhavet(30);
-        printf("Vetor 2 - Posição ");
+        printf("Vetor 2 - Posição \n");
         for ( int j = 0; j < *t; j++){
             printf("[%d]: ", j);    // Alocando valores vetor 02
             scanf("%d", &(*v2)[j]);
