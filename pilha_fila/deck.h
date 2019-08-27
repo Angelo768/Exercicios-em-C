@@ -1,21 +1,20 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-typedef struct stack_element{
-    int number;
-    int suit;
-    int naipe;
+typedef struct stack_cards{
+    int value;
     int turn;
-    struct stack_element *next_card;
-} stack_element;
+    char suit;
+    struct stack_cards *next_element;
+} stack_cards;
 
 typedef struct{
-    stack_element *head;
-} stack_top;
+    stack_cards *head;
+} card_top;
 
 
-stack_top *stack_create(){
-    stack_top *stack = (stack_top*) malloc(sizeof(stack_top));
+card_top *stack_create(){
+    card_top *stack = (card_top*) malloc(sizeof(card_top));
     if (stack == NULL){ 
         printf("Memory Error!!");
         exit(1);
@@ -24,26 +23,23 @@ stack_top *stack_create(){
     return stack;
 }
 
-void stack_push(stack_top *stack, int number){
-    stack_element *card = (stack_element*) malloc(sizeof(stack_element));
+void stack_push(card_top *stack, int value){
+    stack_cards *element = (stack_cards*) malloc(sizeof(stack_cards));
     if (stack == NULL){
         printf("Memory Error!!");
     }
-    card->number = number;
-    card->suit = number%13;
-    // card->naipe = number%13;
-    card->turn = 1;
-    card->next_card = stack->head;
-    stack->head = card;
+    element->value = value;
+    element->next_element = stack->head;
+    stack->head = element;
 }
 
-int stack_pop(stack_top *stack){
-    stack_element *to_Free;
+int stack_pop(card_top *stack){
+    stack_cards *to_Free;
     int toReturn;
     if (stack->head != NULL){
         to_Free = stack->head;
-        toReturn = to_Free->number;
-        stack->head = stack->head->next_card;
+        toReturn = to_Free->value;
+        stack->head = stack->head->next_element;
     }else{
         printf("Stack is empty!!\n");
         exit(1);
@@ -51,15 +47,15 @@ int stack_pop(stack_top *stack){
     return toReturn;
 }
 
-int stack_is_empty(stack_top *stack){
+int stack_is_empty(card_top *stack){
     if (stack->head == NULL){
         return 1;
     }else{
         return 0;
-    }   
+    }
 }
 
-void stack_destroy(stack_top *stack){
+void stack_destroy(card_top *stack){
     while(stack_is_empty(stack) == 1){
         stack_pop(stack);
     }
