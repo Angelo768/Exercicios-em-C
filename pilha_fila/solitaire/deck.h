@@ -2,20 +2,19 @@
 #include <stdio.h>
 
 typedef struct stack_element{
-    int value;
+    int number;
+    char suit;
+    int turn_on;
     struct stack_element *next_element;
 } stack_element;
 
-typedef struct stack_topper{
+typedef struct{
     stack_element *head;
 } stack_top;
 
-int tam;
 
 stack_top *stack_create(){
-    tam = 0;
     stack_top *stack = (stack_top*) malloc(sizeof(stack_top));
-
     if (stack == NULL){ 
         printf("Memory Error!!");
         exit(1);
@@ -24,13 +23,14 @@ stack_top *stack_create(){
     return stack;
 }
 
-void stack_push(stack_top *stack, int value){
+void stack_push(stack_top *stack, int number, char suit, int turn_on){
     stack_element *element = (stack_element*) malloc(sizeof(stack_element));
     if (stack == NULL){
         printf("Memory Error!!");
     }
-    element->value = value;
-    tam++;
+    element->number = number;
+    element->suit = suit;
+    element->turn_on = turn_on;
     element->next_element = stack->head;
     stack->head = element;
 }
@@ -40,7 +40,7 @@ int stack_pop(stack_top *stack){
     int toReturn;
     if (stack->head != NULL){
         to_Free = stack->head;
-        toReturn = to_Free->value;
+        toReturn = to_Free->number;
         stack->head = stack->head->next_element;
     }else{
         printf("Stack is empty!!\n");
@@ -64,16 +64,29 @@ void stack_destroy(stack_top *stack){
     free(stack);
 }
 
-// int mostrar(stack_top *stack){
-//     stack_element *to_Free;
-//     int toReturn;
-//     if (stack->head != NULL){
-//         to_Free = stack->head;
-//         toReturn = to_Free->value;
-//         stack->head = stack->head->next_element;
-//     }else{
-//         printf("Stack is empty!!\n");
-//         exit(1);
+// void exibe(stack_element *PILHA){
+//     if(vazia(PILHA)){
+//     printf("PILHA vazia!\n\n");
+//     return ;
 //     }
-//     return toReturn;
+
+//     stack_element *tmp;
+//     tmp = PILHA->next_element;
+//     printf("PILHA:");
+//     while( tmp != NULL){
+//     printf("%d", tmp->number);
+//     printf("%c", tmp->suit);
+//     printf("%d", tmp->turn_on);
+//     tmp = tmp->next_element;
+//     }
+//     printf("\n        ");
+//     int count;
+//     for(count=0 ; count < 52 ; count++)
+//     printf("  ^  ");
+//     printf("\nOrdem:");
+//     for(count=0 ; count < 52 ; count++)
+//     printf("%5d", count+1);
+
+
+//     printf("\n\n");
 // }
