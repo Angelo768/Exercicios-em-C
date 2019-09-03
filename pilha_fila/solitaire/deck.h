@@ -2,7 +2,7 @@
 #include <stdio.h>
 
 typedef struct stack_element{
-    int number;
+    char number;
     char suit;
     int turn_on;
     struct stack_element *next_element;
@@ -64,29 +64,29 @@ void stack_destroy(stack_top *stack){
     free(stack);
 }
 
-// void exibe(stack_element *PILHA){
-//     if(vazia(PILHA)){
-//     printf("PILHA vazia!\n\n");
-//     return ;
-//     }
+void exibe(stack_top *stack){
+    if(stack->head == NULL){
+        printf("Stack is empty");
+    }
 
-//     stack_element *tmp;
-//     tmp = PILHA->next_element;
-//     printf("PILHA:");
-//     while( tmp != NULL){
-//     printf("%d", tmp->number);
-//     printf("%c", tmp->suit);
-//     printf("%d", tmp->turn_on);
-//     tmp = tmp->next_element;
-//     }
-//     printf("\n        ");
-//     int count;
-//     for(count=0 ; count < 52 ; count++)
-//     printf("  ^  ");
-//     printf("\nOrdem:");
-//     for(count=0 ; count < 52 ; count++)
-//     printf("%5d", count+1);
+    stack_element *tmp;
+    tmp = stack->head->next_element;
+    printf("stack:");
+    while( tmp != NULL){
+        printf("%d", tmp->number);
+        printf("%c", tmp->suit);
+        printf("%d", tmp->turn_on);
+        tmp = tmp->next_element;
+    }
+
+    printf("\n        ");
+
+    for(int count=0 ; count < 52 ; count++)
+    printf("  ^  ");
+    printf("\nOrdem:");
+    for(int count=0 ; count < 52 ; count++)
+    printf("%5d", count+1);
 
 
-//     printf("\n\n");
-// }
+    printf("\n\n");
+}
