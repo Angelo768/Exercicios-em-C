@@ -10,9 +10,10 @@ typedef struct card{
 
 void create_deck(card *deck);
 void shuffle(card *deck);
-void hand_out(stack_top *stack[], stack_top *stock, card *deck);
+void hand_out(stack_top *stack[], stack_top *cards_out[], stack_top *stock, card *deck);
 void show_stack_game(stack_top *stack[], stack_top *stock);
-void show_stock(stack_top *stock);
+void show_stock_discard(stack_top *stock, stack_top *discard);
+void show_stack_cards_out(stack_top *stack[]);
 void move_card(stack_top *stack[], stack_top *stock);
 
 
@@ -22,33 +23,26 @@ int main(){
     stack_top *stock = stack_create();
     stack_top *discard = stack_create();
     stack_top *cards_on_game[7];
+    stack_top *cards_out[4];
     
-    // stack_top *cards_out[4];
-
     create_deck(deck);
     shuffle(deck);
-    hand_out(cards_on_game, stock, deck);
-    // printf("Topper %d", cards_on_game[1]->head->number);
-    // printf("Topper %d", cards_on_game[2]->head->number);
+    hand_out(cards_on_game, cards_out, stock, deck);
     show_stack_game(cards_on_game, stock);
-    show_stock(stock);
-
-    
+    show_stock_discard(stock, discard);
+    show_stack_cards_out(cards_out);
+    // move_card
 
     while(!stack_is_empty(stock) && !stack_is_empty(discard)){
         printf("Pop %d\n", stack_pop(stock));
         printf("Pop %d\n", stack_pop(discard));
     }
-
-    // for(int i = 0; i = 7; i++){
-    //     stack_destroy(cards_on_game[i]);
-    // }
     
     return 0;
 }
 
 void create_deck(card *deck){
-    // srand(time(NULL)); // ATIVAR QUANDO FOR PRECISO EMBARALHAR !!!!!!!!!!!!!!!!!
+    srand(time(NULL)); // ATIVAR QUANDO FOR PRECISO EMBARALHAR !!!!!!!!!!!!!!!!!
     char num = 0;
     for(int i = 0; i < 52; i++){
         num++;
@@ -78,16 +72,14 @@ void shuffle(card *deck){
 	}
 }
 
-void hand_out(stack_top *stack[], stack_top *stock, card *deck){
+void hand_out(stack_top *stack[], stack_top *cards_out[], stack_top *stock, card *deck){
     for(int i = 0; i < 7; i++){
         stack[i] = stack_create();
     }
-    // int i = 0;
     stack_push(stack[0], deck[0].number, deck[0].suit, deck[0].color, 1);
                         
     for(int i = 1; i < 2; i++){
         stack_push(stack[1], deck[i].number, deck[i].suit, deck[i].color, 0);
-        // else stack_push(stack[1], deck[i].number, deck[i].suit, deck[i].color, 0);
     }
     stack_push(stack[1], deck[2].number, deck[2].suit, deck[2].color, 1);
     
@@ -102,12 +94,11 @@ void hand_out(stack_top *stack[], stack_top *stock, card *deck){
     stack_push(stack[3], deck[9].number, deck[9].suit, deck[9].color, 1);
 
     for(int i = 10; i < 14; i++){
-        // if(i == )
         stack_push(stack[4], deck[i].number, deck[i].suit, deck[i].color, 0);
     }
     stack_push(stack[4], deck[14].number, deck[14].suit, deck[14].color, 1);
     
-    for(int i = 15; i < 21; i++){
+    for(int i = 15; i < 20; i++){
         stack_push(stack[5], deck[i].number, deck[i].suit, deck[i].color, 0);
     }
     stack_push(stack[5], deck[20].number, deck[20].suit, deck[20].color, 1);
@@ -117,8 +108,11 @@ void hand_out(stack_top *stack[], stack_top *stock, card *deck){
     }
     stack_push(stack[6], deck[27].number, deck[27].suit, deck[27].color, 1);
     
-    for(int i = 28; i < 52; i++) stack_push(stock, deck[i].number, deck[i].suit, deck[i].color, 0);
+    for(int i = 29; i < 52; i++) stack_push(stock, deck[i].number, deck[i].suit, deck[i].color, 1);
 
+    for(int i = 0; i < 4; i++){
+        cards_out[i] = stack_create();
+    }
 }
 
 void show_stack_game(stack_top *stack[], stack_top *stock){
@@ -146,10 +140,9 @@ void show_stack_game(stack_top *stack[], stack_top *stock){
 
 }
 
-void show_stock(stack_top *stock){
-    printf("E: \n");
+void show_stock_discard(stack_top *stock, stack_top *discard){
     int a = 0;
-    printf("T%d", stock->tam);
+    printf("E: T%d\n", stock->tam);
     while(!stack_is_empty(stock)){
         printf("|");
         if(stock->head->number == 65 || stock->head->number == 74 || stock->head->number == 75 || stock->head->number == 81){
@@ -167,8 +160,49 @@ void show_stock(stack_top *stock){
     }
     printf("\n");
 
+    printf("D: T%d\n", discard->tam);
+    while(!stack_is_empty(discard)){
+        printf("|");
+        if(discard->head->number == 65 || discard->head->number == 74 || discard->head->number == 75 || discard->head->number == 81){
+            printf("%c ", discard->head->number);
+        }else{
+            printf("%d ", discard->head->number);
+        }  
+
+        printf("%c ", discard->head->suit);
+        printf("%c ", discard->head->color);
+        printf("%d ", discard->head->turn_on);
+        a++;
+        if(a % 12 == 0) printf("\n");
+        stack_pop(discard);
+    }
+    
 }
 
+void show_stack_cards_out(stack_top *cards_out[]){
+    printf("\n");
+    for(int i = 0; i < 4; i++){
+            printf("S: T%d", cards_out[i]->tam);
+            printf("\n");
+        while(!stack_is_empty(cards_out[i])){
+            printf("|");
+
+            if(cards_out[i]->head->number > 9) {
+                if(cards_out[i]->head->number == 65 || cards_out[i]->head->number == 74 || cards_out[i]->head->number == 75 || cards_out[i]->head->number == 81){
+                    printf(" %c ", cards_out[i]->head->number);
+                }else{
+                    printf("%d ", cards_out[i]->head->number);
+                }
+            } else printf(" %d ", cards_out[i]->head->number);
+            printf("%c ", cards_out[i]->head->suit);
+            printf("%c ", cards_out[i]->head->color);
+            printf("%d ", cards_out[i]->head->turn_on);
+            stack_pop(cards_out[i]);
+        }
+    }
+    printf("\n");
+
+}
 // void move_card(stack_top *stack[], stack_top *stock, stack_top *discard, stack_top *discard){
 
 // }
