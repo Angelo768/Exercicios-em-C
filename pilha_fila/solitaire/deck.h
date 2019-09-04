@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+
 typedef struct stack_element{
     char number;
     char suit;
@@ -10,6 +11,7 @@ typedef struct stack_element{
 } stack_element;
 
 typedef struct{
+    int tam;
     stack_element *head;
 } stack_top;
 
@@ -21,6 +23,7 @@ stack_top *stack_create(){
         exit(1);
     }
     stack->head = NULL;
+    stack->tam = 0;
     return stack;
 }
 
@@ -33,8 +36,10 @@ void stack_push(stack_top *stack, char number, char suit, char color, int turn_o
     element->suit = suit;
     element->color = color;
     element->turn_on = turn_on;
+    // element->tam++;
     element->next_element = stack->head;
     stack->head = element;
+    stack->tam++;
 }
 
 int stack_pop(stack_top *stack){
@@ -44,6 +49,7 @@ int stack_pop(stack_top *stack){
         to_Free = stack->head;
         toReturn = to_Free->number;
         stack->head = stack->head->next_element;
+        stack->tam--;
     }else{
         printf("Stack is empty!!\n");
         exit(1);
