@@ -13,6 +13,7 @@ typedef struct stack_element{
 typedef struct{
     int tam;
     stack_element *head;
+    stack_element *tail;
 } stack_top;
 
 
