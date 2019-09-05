@@ -15,9 +15,9 @@ void show_stack_game(stack_top *stack[]);
 void show_stock_discard(stack_top *stock_discard[]);
 void show_stack_cards_out(stack_top *stack[]);
 
-void show_stack(stack_top *stack[]);
+void show_stack(stack_top *stack[], int tam, char letra);
 
-void move_card(stack_top *comes[], stack_top *from[]);
+// void move_card(stack_top *comes, stack_top *from);
 
 
 void create_deck(card *deck){
@@ -99,10 +99,10 @@ void hand_out(stack_top *stack[], stack_top *cards_out[], stack_top *stock_disca
 
 }
 
-void show_stack_game(stack_top *stack[]){
-    for(int i = 0; i < 7; i++){
+void show_stack(stack_top *stack[], int tam, char letra){
+    for(int i = 0; i < tam; i++){
         printf("\n");
-        printf("J%d: ", i+1);
+        printf("%c%d: ",letra, i+1);
         printf("T%d", stack[i]->tam);
         while(!stack_is_empty(stack[i])){
             printf("|");
@@ -119,96 +119,7 @@ void show_stack_game(stack_top *stack[]){
             printf("%d ", stack[i]->head->turn_on);
             stack_pop(stack[i]);
         }
-    }
-    printf("\n\n");
-
-}
-
-void show_stock_discard(stack_top *stock_discard[]){
-    int a = 0;
-    printf("E: T%d\n", stock_discard[0]->tam);
-    while(!stack_is_empty(stock_discard[0])){
-        printf("|");
-        if(stock_discard[0]->head->number == 65 || stock_discard[0]->head->number == 74 || stock_discard[0]->head->number == 75 || stock_discard[0]->head->number == 81){
-            printf("%c ", stock_discard[0]->head->number);
-        }else{
-            printf("%d ", stock_discard[0]->head->number);
-        }  
-
-        printf("%c ", stock_discard[0]->head->suit);
-        printf("%c ", stock_discard[0]->head->color);
-        printf("%d ", stock_discard[0]->head->turn_on);
-        a++;
-        if(a % 12 == 0) printf("\n");
-        stack_pop(stock_discard[0]);
-    }
-    printf("\n\n");
-
-    printf("D: T%d\n", stock_discard[1]->tam);
-    while(!stack_is_empty(stock_discard[1])){
-        printf("|");
-        if(stock_discard[1]->head->number == 65 || stock_discard[1]->head->number == 74 || stock_discard[1]->head->number == 75 || stock_discard[1]->head->number == 81){
-            printf("%c ", stock_discard[1]->head->number);
-        }else{
-            printf("%d ", stock_discard[1]->head->number);
-        }  
-
-        printf("%c ", stock_discard[1]->head->suit);
-        printf("%c ", stock_discard[1]->head->color);
-        printf("%d ", stock_discard[1]->head->turn_on);
-        a++;
-        if(a % 12 == 0) printf("\n");
-        stack_pop(stock_discard[1]);
-    }
-    
-}
-
-void show_stack_cards_out(stack_top *cards_out[]){
-    printf("\n");
-    for(int i = 0; i < 4; i++){
-            printf("S: T%d", cards_out[i]->tam);
-            printf("\n");
-        while(!stack_is_empty(cards_out[i])){
-            printf("|");
-
-            if(cards_out[i]->head->number > 9) {
-                if(cards_out[i]->head->number == 65 || cards_out[i]->head->number == 74 || cards_out[i]->head->number == 75 || cards_out[i]->head->number == 81){
-                    printf(" %c ", cards_out[i]->head->number);
-                }else{
-                    printf("%d ", cards_out[i]->head->number);
-                }
-            } else printf(" %d ", cards_out[i]->head->number);
-            printf("%c ", cards_out[i]->head->suit);
-            printf("%c ", cards_out[i]->head->color);
-            printf("%d ", cards_out[i]->head->turn_on);
-            stack_pop(cards_out[i]);
-        }
+            if (tam == 2) printf("\n");
     }
     printf("\n");
-
-}
-
-void show_stack(stack_top *stack[]){
-    printf("Erro Abaixo!!");
-    for(int i = 0; i < stack[i]->tam; i++){
-        printf("\n");
-        printf("J%d: ", i+1);
-        printf("T%d", stack[i]->tam);
-        while(!stack_is_empty(stack[i])){
-            printf("|");
-
-            if(stack[i]->head->number > 9) {
-                if(stack[i]->head->number == 65 || stack[i]->head->number == 74 || stack[i]->head->number == 75 || stack[i]->head->number == 81){
-                    printf(" %c ", stack[i]->head->number);
-                }else{
-                    printf("%d ", stack[i]->head->number);
-                }
-            } else printf(" %d ", stack[i]->head->number);
-            printf("%c ", stack[i]->head->suit);
-            printf("%c ", stack[i]->head->color);
-            printf("%d ", stack[i]->head->turn_on);
-            stack_pop(stack[i]);
-        }
-    }
-    printf("\n\n");
 }
