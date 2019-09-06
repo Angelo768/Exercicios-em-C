@@ -13,10 +13,16 @@ int main(){
     // show_stack(cards_on_game, 7, 'J');
     // printf("Number: %d \n", stock_discard[0]->head->number);
     // show_stack(stock_discard, 2, 'E');
-    // move_card(stock_discard[0], stock_discard[1], 6);
+    // stack_push(stock_discard[1], 'A', 'C', 'R', 1);
     play_the_game(stock_discard, cards_on_game, cards_out);
 
+    // if(stock_discard[1]->head->number == 'A'){
+    //     printf("\nSucesso!");
+    // }
+
+    check_at(stock_discard, cards_on_game, cards_out);
     show_stack(stock_discard, 2, 'E');
+
     // show_stack(cards_out, 4, 'S');
 
     for(int i = 0; i < 7;i++){

@@ -13,7 +13,6 @@ typedef struct stack_element{
 typedef struct{
     int tam;
     stack_element *head;
-    stack_element *tail;
 } stack_top;
 
 
@@ -37,7 +36,6 @@ void stack_push(stack_top *stack, char number, char suit, char color, int turn_o
     element->suit = suit;
     element->color = color;
     element->turn_on = turn_on;
-    // element->tam++;
     element->next_element = stack->head;
     stack->head = element;
     stack->tam++;
