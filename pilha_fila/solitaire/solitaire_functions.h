@@ -16,10 +16,9 @@ void move_cards(stack_top *comes, stack_top *from, int cards);
 
 int move_the_ace(stack_top *stock_discard[], stack_top *cards_on_game[], stack_top *cards_out[]);
 void play_the_game(stack_top *stock_discard[], stack_top *cards_on_game[], stack_top *cards_out[]);
-void turn_card(stack_top *cards_on_game[]);
 
 void create_deck(card *deck){
-    // srand(time(NULL)); // ATIVAR QUANDO FOR PRECISO EMBARALHAR !!!!!!!!!!!!!!!!!
+    srand(time(NULL)); // ATIVAR QUANDO FOR PRECISO EMBARALHAR !!!!!!!!!!!!!!!!!
     char num = 0;
     for(int i = 0; i < 52; i++){
         num++;
@@ -133,7 +132,6 @@ void move_cards(stack_top *comes, stack_top *from, int cards){
 void play_the_game(stack_top *stock_discard[], stack_top *cards_on_game[], stack_top *cards_out[]){
     move_cards(stock_discard[0], stock_discard[1], 1);
     move_the_ace(stock_discard, cards_on_game, cards_out);
-    turn_card(cards_on_game);
 }
 
 int move_the_ace(stack_top *stock_discard[], stack_top *cards_on_game[], stack_top *cards_out[]){
@@ -142,40 +140,39 @@ int move_the_ace(stack_top *stock_discard[], stack_top *cards_on_game[], stack_t
         if (stock_discard[1]->head->suit == 'E'){
             printf("\nStock Discard - Encontrei um 'AE'!\n");
             move_cards(stock_discard[1], cards_out[0], 1);
+            move_cards(stock_discard[0], stock_discard[1], 1);
         } else if (stock_discard[1]->head->suit == 'C') {
             printf("\nStock Discard - Encontrei um 'AC'!\n");
             move_cards(stock_discard[1], cards_out[1], 1);
+            move_cards(stock_discard[0], stock_discard[1], 1);
         }   else if (stock_discard[1]->head->suit == 'P') {
             printf("\nStock Discard - Encontrei um 'AP'!\n");
             move_cards(stock_discard[1], cards_out[2], 1);
+            move_cards(stock_discard[0], stock_discard[1], 1);
         } else if (stock_discard[1]->head->suit == 'O') {
             printf("\nStock Discard - Encontrei um 'AO'!\n");
             move_cards(stock_discard[1], cards_out[3], 1);
+            move_cards(stock_discard[0], stock_discard[1], 1);
         }
     }
 
     for(int i = 0; i < 7; i++){
         if(cards_on_game[i]->head->number == 'A'){
             if (cards_on_game[i]->head->suit == 'E'){
-                printf("\nCards on game - Encontrei um 'AE'!\n");
+                printf("\nCards on game [J%d]- Encontrei um 'AE'!\n", i+1);
                 move_cards(cards_on_game[i], cards_out[0], 1);
             } else if (cards_on_game[i]->head->suit == 'C') {
-                printf("\nCards on game - Encontrei um 'AC'!\n");
+                printf("\nCards on game [J%d]- Encontrei um 'AC'!\n", i+1);
                 move_cards(cards_on_game[i], cards_out[1], 1);
-            }   else if (cards_on_game[i]->head->suit == 'P') {
-                printf("\nCards on game - Encontrei um 'AP'!\n");
+            } else if (cards_on_game[i]->head->suit == 'P') {
+                printf("\nCards on game [J%d]- Encontrei um 'AP'!\n", i+1);
                 move_cards(cards_on_game[i], cards_out[2], 1);
             } else if (cards_on_game[i]->head->suit == 'O') {
-                printf("\nCards on game - Encontrei um 'AO'!\n");
+                printf("\nCards on game [J%d]- Encontrei um 'AO'!\n", i+1);
                 move_cards(cards_on_game[i], cards_out[3], 1);
             }
+        if(cards_on_game[i]->head != NULL) cards_on_game[i]->head->turn_on = 1;
         }
     }
 
-}
-
-void turn_card(stack_top *cards_on_game[]){
-    for(int i = 0; i < 7; i++){
-        if(cards_on_game[i]->head->turn_on == 0) cards_on_game[i]->head->turn_on = 1;
-    }
 }
