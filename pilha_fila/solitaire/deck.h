@@ -4,6 +4,8 @@
 
 typedef struct stack_element{
     char number;
+    char next;
+    char prev;
     char suit;
     char color;
     int turn_on;
@@ -27,12 +29,14 @@ stack_top *stack_create(){
     return stack;
 }
 
-void stack_push(stack_top *stack, char number, char suit, char color, int turn_on){
+void stack_push(stack_top *stack, char prev, char number, char next, char suit, char color, int turn_on){
     stack_element *element = (stack_element*) malloc(sizeof(stack_element));
     if (stack == NULL){
         printf("Memory Error!!");
     }
+    element->prev = prev;
     element->number = number;
+    element->next = next;
     element->suit = suit;
     element->color = color;
     element->turn_on = turn_on;
