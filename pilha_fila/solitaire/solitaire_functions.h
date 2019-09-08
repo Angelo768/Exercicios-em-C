@@ -14,8 +14,9 @@ void hand_out(stack_top *stack[], stack_top *cards_out[], stack_top *stock_disca
 void show_stack(stack_top *stack[], int tam, char letra);
 void move_cards(stack_top *comes, stack_top *from, int cards);
 
-int move_the_ace(stack_top *stock_discard[], stack_top *cards_on_game[], stack_top *cards_out[]);
+void move_the_ace(stack_top *stock_discard[], stack_top *cards_on_game[], stack_top *cards_out[]);
 void play_the_game(stack_top *stock_discard[], stack_top *cards_on_game[], stack_top *cards_out[]);
+void move_cards_on_game(stack_top *cards_on_game[]);
 
 void create_deck(card *deck){
     srand(time(NULL)); // ATIVAR QUANDO FOR PRECISO EMBARALHAR !!!!!!!!!!!!!!!!!
@@ -134,9 +135,9 @@ void play_the_game(stack_top *stock_discard[], stack_top *cards_on_game[], stack
     move_the_ace(stock_discard, cards_on_game, cards_out);
 }
 
-int move_the_ace(stack_top *stock_discard[], stack_top *cards_on_game[], stack_top *cards_out[]){
+void move_the_ace(stack_top *stock_discard[], stack_top *cards_on_game[], stack_top *cards_out[]){
         
-    if(stock_discard[1]->head->number == 'A'){
+    while(stock_discard[1]->head->number == 'A'){
         if (stock_discard[1]->head->suit == 'E'){
             printf("\nStock Discard - Encontrei um 'AE'!\n");
             move_cards(stock_discard[1], cards_out[0], 1);
@@ -175,4 +176,20 @@ int move_the_ace(stack_top *stock_discard[], stack_top *cards_on_game[], stack_t
         }
     }
 
+}
+
+void move_cards_on_game(stack_top *cards_on_game[]){
+    char prev_card, next_card;
+    for(int i = 0; i < 7; i++){
+        if (cards_on_game[i]->head->number == 'J'){
+            
+        } else if (cards_on_game[i]->head->number == 'Q'){
+            prev_card = 'J';
+            next_card = 'K';
+        } else if (cards_on_game[i]->head->number == 'K'){
+            prev_card = 'Q';
+            next_card = NULL;
+        } 
+        
+    }
 }
