@@ -22,7 +22,7 @@ void move_stack_game_to_stack_game(stack_top *cards_on_game[]);
 void play_the_game(stack_top *stock_discard[], stack_top *cards_on_game[], stack_top *cards_out[]);
 
 void create_deck(card *deck){
-    srand(time(NULL)); // ATIVAR QUANDO FOR PRECISO EMBARALHAR !!!!!!!!!!!!!!!!!
+    // srand(time(NULL)); // ATIVAR QUANDO FOR PRECISO EMBARALHAR !!!!!!!!!!!!!!!!!
     char num = 0;
     for(int i = 0; i < 52; i++){
         num++;
@@ -167,7 +167,7 @@ void play_the_game(stack_top *stock_discard[], stack_top *cards_on_game[], stack
 
     move_cards(stock_discard[0], stock_discard[1], 1);
     // move_stack_game_to_stack_game(cards_on_game);
-    move_to_out(stock_discard, cards_on_game, cards_out);
+    // move_to_out(stock_discard, cards_on_game, cards_out);
 }
 
 void move_to_out(stack_top *stock_discard[], stack_top *cards_on_game[], stack_top *cards_out[]){
@@ -248,7 +248,7 @@ void move_stack_game_to_stack_game(stack_top *cards_on_game[]){
             for(int j=0; j<7;j++) {
                 if(cards_on_game[j]->head != NULL) {
                     if(cards_on_game[j]->head->number == aux->next) {
-                        printf("\nJ%d J%d %d%c\n ", 1+i, 1+j, aux->number, aux->suit);
+                        printf("J%d J%d %d%c\n ", 1+i, 1+j, aux->number, aux->suit);
                         move_cards(cards_on_game[i], cards_on_game[j], n);
                         break;
                     }

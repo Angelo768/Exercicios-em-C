@@ -11,7 +11,8 @@ int main(){
     shuffle(deck);
     hand_out(cards_on_game, cards_out, stock_discard, deck);
     play_the_game(stock_discard, cards_on_game, cards_out);
-
+    // stack_top *qualquer;
+    // stack_push()
     // printf("Number: %d \n", cards_on_game[1]->head->prev);
     // printf("Number: %d \n", cards_on_game[1]->head->number);
     // printf("Number: %d \n", cards_on_game[1]->head->next);
