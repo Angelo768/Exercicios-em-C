@@ -64,16 +64,4 @@ void stack_destroy(stack_top *stack){
     free(stack);
 }
 
-// int mostrar(stack_top *stack){
-//     stack_element *to_Free;
-//     int toReturn;
-//     if (stack->head != NULL){
-//         to_Free = stack->head;
-//         toReturn = to_Free->value;
-//         stack->head = stack->head->next_element;
-//     }else{
-//         printf("Stack is empty!!\n");
-//         exit(1);
-//     }
-//     return toReturn;
-// }
+ 
