@@ -172,14 +172,14 @@ void play_the_game(stack_top *stock_discard[], stack_top *cards_on_game[], stack
     // se n tiver movimento possível, go to 157;
 
     move_cards(stock_discard[0], stock_discard[1], 1);
-    move_to_out(stock_discard, cards_on_game, cards_out);
-    printSemDelete(cards_on_game);
-    move_stack_game_to_stack_game(cards_on_game);
-    // for (int i = 0; i < 1000; i++) {
+    //move_to_out(stock_discard, cards_on_game, cards_out);
+    //printSemDelete(cards_on_game);
+    //move_stack_game_to_stack_game(cards_on_game);
+    for (int i = 0; i < 1000; i++) {
         move_to_out(stock_discard, cards_on_game, cards_out);
-    //}
-    printf("\n");
-    printSemDelete(cards_on_game);
+    }
+    //printf("\n");
+    //printSemDelete(cards_on_game);
 }
 
 void move_to_out(stack_top *stock_discard[], stack_top *cards_on_game[], stack_top *cards_out[]){
