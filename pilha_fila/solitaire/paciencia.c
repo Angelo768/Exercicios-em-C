@@ -19,9 +19,10 @@ int main(){
     // cards_on_game[1]->head->next_element->turn_on = 1;
     // printf("Number: %d \n", cards_on_game[1]->head->next_element->turn_on);
     // printf('%c', cards_on_game[0]->head->number);
-    show_stack(cards_on_game, 7, 'J');
+    printf("\n\n");
+    // show_stack(cards_on_game, 7, 'J');
     show_stack(cards_out, 4, 'S');
-    show_stack(stock_discard, 2, 'E');
+    // show_stack(stock_discard, 2, 'E');
 
 
     // for(int i = 0; i < 7;i++){

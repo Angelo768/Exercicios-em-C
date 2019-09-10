@@ -18,6 +18,7 @@ void show_stack(stack_top *stack[], int tam, char letra);
 void move_cards(stack_top *comes, stack_top *from, int cards);
 void move_to_out(stack_top *stock_discard[], stack_top *cards_on_game[], stack_top *cards_out[]);
 void move_stack_game_to_stack_game(stack_top *cards_on_game[]);
+void printSemDelete(stack_top *cards_on_game[]);
 
 void play_the_game(stack_top *stock_discard[], stack_top *cards_on_game[], stack_top *cards_out[]);
 
@@ -149,10 +150,15 @@ void show_stack(stack_top *stack[], int tam, char letra){
 }
 
 void move_cards(stack_top *comes, stack_top *from, int cards){
-        for(int i = 0; i < cards; i++){
-            stack_push(from, comes->head->prev, comes->head->number, comes->head->next, comes->head->suit, comes->head->color, comes->head->turn_on);
-            stack_pop(comes);
-        }
+    stack_top *aux = stack_create();
+    for(int i = 0; i < cards; i++){
+        stack_push(aux, comes->head->prev, comes->head->number, comes->head->next, comes->head->suit, comes->head->color, comes->head->turn_on);
+        stack_pop(comes);
+    }
+    while(aux->head != NULL){
+        stack_push(from, aux->head->prev, aux->head->number, aux->head->next, aux->head->suit, aux->head->color, aux->head->turn_on);
+        stack_pop(aux);
+    }
 }
 
 void play_the_game(stack_top *stock_discard[], stack_top *cards_on_game[], stack_top *cards_out[]){
@@ -166,8 +172,14 @@ void play_the_game(stack_top *stock_discard[], stack_top *cards_on_game[], stack
     // se n tiver movimento possível, go to 157;
 
     move_cards(stock_discard[0], stock_discard[1], 1);
-    // move_stack_game_to_stack_game(cards_on_game);
     move_to_out(stock_discard, cards_on_game, cards_out);
+    printSemDelete(cards_on_game);
+    move_stack_game_to_stack_game(cards_on_game);
+    // for (int i = 0; i < 1000; i++) {
+        move_to_out(stock_discard, cards_on_game, cards_out);
+    //}
+    printf("\n");
+    printSemDelete(cards_on_game);
 }
 
 void move_to_out(stack_top *stock_discard[], stack_top *cards_on_game[], stack_top *cards_out[]){
@@ -218,27 +230,28 @@ void move_to_out(stack_top *stock_discard[], stack_top *cards_on_game[], stack_t
     }
 
 
-        for(int i = 0; i < 4; i++){
-            if(cards_out[i]->head == NULL){
-                i++;
-            } else {
-                for(int j = 0; j < 7; j++){
-                    if(cards_on_game[j]->head != NULL){
-                        if((cards_on_game[j]->head->number == cards_out[i]->head->next) && (cards_on_game[j]->head->suit == cards_out[i]->head->suit)){
-                            if(cards_on_game[i]->head->number != 65 || cards_on_game[i]->head->number != 74 || cards_on_game[i]->head->number != 75 || cards_on_game[i]->head->number != 81){
-                                printf("J%d S%d %d%c", j+1, i+1, cards_on_game[j]->head->number, cards_on_game[i]->head->suit);
-                            }
-                            move_cards(cards_on_game[j], cards_out[i], 1);
-                            if(cards_on_game[j]->head != NULL) cards_on_game[j]->head->turn_on = 1;
+    for(int i = 0; i < 4; i++){
+        if(cards_out[i]->head == NULL){
+            i++;
+        } else {
+            for(int j = 0; j < 7; j++){
+                if(cards_on_game[j]->head != NULL){
+                    if((cards_on_game[j]->head->number == cards_out[i]->head->next) && (cards_on_game[j]->head->suit == cards_out[i]->head->suit)){
+                        if(cards_on_game[i]->head->number != 65 || cards_on_game[i]->head->number != 74 || cards_on_game[i]->head->number != 75 || cards_on_game[i]->head->number != 81){
+                            printf("J%d S%d %d%c", j+1, i+1, cards_on_game[j]->head->number, cards_on_game[i]->head->suit);
                         }
+                        move_cards(cards_on_game[j], cards_out[i], 1);
+                        if(cards_on_game[j]->head != NULL) cards_on_game[j]->head->turn_on = 1;
                     }
                 }
             }
+        }
     }
 }
 
 void move_stack_game_to_stack_game(stack_top *cards_on_game[]){
     stack_element *aux;
+    stack_top *pTest;
     for (int i = 0; i < 7; i++){
         if(cards_on_game[i]->head == NULL) i++;
         
@@ -247,14 +260,41 @@ void move_stack_game_to_stack_game(stack_top *cards_on_game[]){
             if(aux->turn_on == 0) {break;};
             for(int j=0; j<7;j++) {
                 if(cards_on_game[j]->head != NULL) {
-                    if(cards_on_game[j]->head->number == aux->next) {
-                        printf("\nJ%d J%d %d%c\n ", 1+i, 1+j, aux->number, aux->suit);
+                    // printf("alou");
+                    if(cards_on_game[j]->head->number == aux->next && i!=j) {
+                        printf("\nJ%d J%d %d%c\n", 1+i, 1+j, aux->number, aux->suit);
                         move_cards(cards_on_game[i], cards_on_game[j], n);
+                        if(cards_on_game[i]->head != NULL) cards_on_game[i]->head->turn_on = 1;
                         break;
                     }
                 }
             }
             aux = aux->next_element;
         }
+    }
+}
+
+void printSemDelete(stack_top *cards_on_game[]){
+    stack_element *aux;
+    for (int i=0;i<7;i++){
+        if(cards_on_game[i]->head == NULL) {
+            printf("J%d :\n",1+i);
+            i++;
+        }
+        printf("J%d :",1+i);
+        aux = cards_on_game[i]->head;
+        for (int n = 1; aux != NULL; n++){
+            for(int j=0;j<7;j++) {
+                if(cards_on_game[j]->head != NULL) {
+                    if(aux->number > 9) {
+                        if (aux->number == 10) printf("%d%c %d |", aux->number, aux->suit, aux->turn_on);
+                        else printf(" %c%c %d |", aux->number, aux->suit, aux->turn_on);
+                    } else printf(" %d%c %d |", aux->number, aux->suit, aux->turn_on);
+                    break;
+                }
+            }
+            aux = aux->next_element;
+        }
+        printf("\n");
     }
 }
